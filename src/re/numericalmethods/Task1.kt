@@ -26,28 +26,23 @@ class Task1 {
 
     private fun getCorrectDouble(value: Double) = Math.round(value * 1000.0) / 1000.0
 
-    fun printAsTable(values: MutableMap<Double, MutableList<Double>>) {
-        val firstKey = values.keys.first()
-        val lastKey = values.keys.last()
+    private fun printHeader(with: String) {
+        println("x$with f(x)$with sum(x)$with f+(x)$with f-(x)$with f+-(x)")
+    }
 
-        println("x\t\t f(x)\t\t sum(x)\t\t f+(x)\t\t f-(x)\t\t f+-(x)")
-
-        println("$firstKey\t\t ${getCorrectDouble(values[firstKey]!![0])}\t\t " +
-                "${getCorrectDouble(values[firstKey]!![1])}\t\t " +
-                "-\t\t\t -\t\t\t -")
-
-        values.filter { x -> x.value.size == 5 }.forEach {
-            print("${it.component1()}\t\t ")
-            it.value.forEach {
-                print("${getCorrectDouble(it)}\t\t ")
-            }
-            println()
+    private fun printTableRow(key: Double, values: MutableList<Double>, with: String) {
+        print("$key$with ")
+        values.forEach {
+            print("${getCorrectDouble(it)}$with ")
         }
+        println()
+    }
 
-        println("$lastKey\t\t ${getCorrectDouble(values[lastKey]!![0])}\t\t " +
-                "${getCorrectDouble(values[lastKey]!![1])}\t\t " +
-                "-\t\t\t -\t\t\t -")
-
+    fun printAsTable(values: MutableMap<Double, MutableList<Double>>) {
+        printHeader("\t\t")
+        values.forEach {
+            printTableRow(it.key, it.value, "\t\t")
+        }
     }
 
     fun fillFuncValuesMap(a: Double, b: Double, h: Double, e: Double) : MutableMap<Double, MutableList<Double>> {
