@@ -24,39 +24,43 @@ class Task1 {
 
     private fun centralDerivative(fprev: Double, fnext: Double, h: Double) : Double = (fnext - fprev) / (2 * h)
 
-    fun printAsTable(values: MutableMap<Double, MutableList<Double>>) {
-        println("x\t\t f(x)\t\t sum(x)\t\t f+(x)\t\t f-(x)\t\t f+-(x)")
-    }
+    private fun getCorrectDouble(value: Double) = Math.round(value * 100.0) / 100.0
+
+//    fun printAsTable(values: MutableMap<Double, MutableList<Double>>) {
+//        println("x\t\t f(x)\t\t sum(x)\t\t f+(x)\t\t f-(x)\t\t f+-(x)")
+//    }
 
     fun fillFuncValuesMap(a: Double, b: Double, h: Double, e: Double) : MutableMap<Double, MutableList<Double>> {
         val funcValues: MutableMap<Double, MutableList<Double>> = mutableMapOf()
         var x = a
 
-        while (x <= b) {
+        while (x < b + h) {
             funcValues.put(x, mutableListOf())
             funcValues[x]?.add(this.sum(x, e))
             funcValues[x]?.add(this.f(x))
 
-            x += h
+            x = getCorrectDouble(x + h)
         }
 
-        x = a + h
+        x = getCorrectDouble(a + h)
         while (x < b) {
             funcValues[x]?.add(this.rightDerivative(
                     funcValues[x]!![0],
-                    funcValues[x + h]!![0],
+                    funcValues[getCorrectDouble(x + h)]!![0],
                     h
             ))
             funcValues[x]?.add(this.leftDerivative(
-                    funcValues[x - h]!![0],
+                    funcValues[getCorrectDouble(x - h)]!![0],
                     funcValues[x]!![0],
                     h
             ))
             funcValues[x]?.add(this.centralDerivative(
-                    funcValues[x - h]!![0],
-                    funcValues[x + h]!![0],
+                    funcValues[getCorrectDouble(x - h)]!![0],
+                    funcValues[getCorrectDouble(x + h)]!![0],
                     h
             ))
+
+            x = getCorrectDouble(x + h)
         }
 
         return funcValues
@@ -72,5 +76,6 @@ fun main(args: Array<String>) {
             h = 0.1,
             e = 0.0001
     )
+//    task.printAsTable(values)
 
 }
