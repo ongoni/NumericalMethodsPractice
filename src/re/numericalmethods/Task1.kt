@@ -24,11 +24,31 @@ class Task1 {
 
     private fun centralDerivative(fprev: Double, fnext: Double, h: Double) : Double = (fnext - fprev) / (2 * h)
 
-    private fun getCorrectDouble(value: Double) = Math.round(value * 100.0) / 100.0
+    private fun getCorrectDouble(value: Double) = Math.round(value * 1000.0) / 1000.0
 
-//    fun printAsTable(values: MutableMap<Double, MutableList<Double>>) {
-//        println("x\t\t f(x)\t\t sum(x)\t\t f+(x)\t\t f-(x)\t\t f+-(x)")
-//    }
+    fun printAsTable(values: MutableMap<Double, MutableList<Double>>) {
+        val firstKey = values.keys.first()
+        val lastKey = values.keys.last()
+
+        println("x\t\t f(x)\t\t sum(x)\t\t f+(x)\t\t f-(x)\t\t f+-(x)")
+
+        println("$firstKey\t\t ${getCorrectDouble(values[firstKey]!![0])}\t\t " +
+                "${getCorrectDouble(values[firstKey]!![1])}\t\t " +
+                "-\t\t\t -\t\t\t -")
+
+        values.filter { x -> x.value.size == 5 }.forEach {
+            print("${it.component1()}\t\t ")
+            it.value.forEach {
+                print("${getCorrectDouble(it)}\t\t ")
+            }
+            println()
+        }
+
+        println("$lastKey\t\t ${getCorrectDouble(values[lastKey]!![0])}\t\t " +
+                "${getCorrectDouble(values[lastKey]!![1])}\t\t " +
+                "-\t\t\t -\t\t\t -")
+
+    }
 
     fun fillFuncValuesMap(a: Double, b: Double, h: Double, e: Double) : MutableMap<Double, MutableList<Double>> {
         val funcValues: MutableMap<Double, MutableList<Double>> = mutableMapOf()
@@ -76,6 +96,6 @@ fun main(args: Array<String>) {
             h = 0.1,
             e = 0.0001
     )
-//    task.printAsTable(values)
+    task.printAsTable(values)
 
 }
