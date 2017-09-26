@@ -18,30 +18,32 @@ class Task1 {
         return result - current
     }
 
-    private fun rightDerivative(f: Double, fnext: Double, h: Double) : Double = (fnext - f) / h
-
     private fun leftDerivative(fprev: Double, f: Double, h: Double) : Double = (f - fprev) / h
 
+    private fun rightDerivative(f: Double, fnext: Double, h: Double) : Double = (fnext - f) / h
+
     private fun centralDerivative(fprev: Double, fnext: Double, h: Double) : Double = (fnext - fprev) / (2 * h)
+
+    private fun Double.format(count: Int) = String.format("%.${count}f", this)
 
     private fun getCorrectDouble(value: Double) = Math.round(value * 1000.0) / 1000.0
 
     private fun printHeader(with: String) {
-        println("x$with f(x)$with sum(x)$with f+(x)$with f-(x)$with f+-(x)")
+        println("x$with sum(x)$with f(x)$with f-(x)$with f+(x)$with f+-(x)")
     }
 
     private fun printTableRow(key: Double, values: MutableList<Double>, with: String) {
         print("$key$with ")
         values.forEach {
-            print("${getCorrectDouble(it)}$with ")
+            print("${it.format(5)}$with ")
         }
         println()
     }
 
     fun printAsTable(values: MutableMap<Double, MutableList<Double>>) {
-        printHeader("\t\t")
+        printHeader("\t\t\t")
         values.forEach {
-            printTableRow(it.key, it.value, "\t\t")
+            printTableRow(it.key, it.value, "\t\t  ")
         }
     }
 
@@ -59,14 +61,14 @@ class Task1 {
 
         x = getCorrectDouble(a + h)
         while (x < b) {
-            funcValues[x]?.add(this.rightDerivative(
-                    funcValues[x]!![0],
-                    funcValues[getCorrectDouble(x + h)]!![0],
-                    h
-            ))
             funcValues[x]?.add(this.leftDerivative(
                     funcValues[getCorrectDouble(x - h)]!![0],
                     funcValues[x]!![0],
+                    h
+            ))
+            funcValues[x]?.add(this.rightDerivative(
+                    funcValues[x]!![0],
+                    funcValues[getCorrectDouble(x + h)]!![0],
                     h
             ))
             funcValues[x]?.add(this.centralDerivative(
