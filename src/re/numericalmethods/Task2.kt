@@ -68,6 +68,7 @@ class Task2 : DoubleValuesUtils {
         val a = -Math.PI / 2; val b = 0.0
         val h = (b - a) / n
 
+        println("exact value - " + (2.5 - Math.exp(-Math.PI) / 2))
         println("right rectangles - " + rightRectangles(a, n, h))
         println("left rectangles - " + leftRectangles(a, n, h))
         println("central rectangles - " + centralRectangles(a, n, h))
