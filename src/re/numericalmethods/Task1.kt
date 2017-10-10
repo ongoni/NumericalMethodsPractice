@@ -36,14 +36,14 @@ class Task1 : DoubleValuesUtils {
         println()
     }
 
-    fun printAsTable(values: MutableMap<Double, MutableList<Double>>) {
+    private fun printAsTable(values: MutableMap<Double, MutableList<Double>>) {
         printHeader("\t\t\t")
         values.forEach {
             printTableRow(it.key, it.value, "\t\t  ")
         }
     }
 
-    fun fillFuncValuesMap(a: Double, b: Double, h: Double, e: Double) : MutableMap<Double, MutableList<Double>> {
+    private fun fillFuncValuesMap(a: Double, b: Double, h: Double, e: Double) : MutableMap<Double, MutableList<Double>> {
         val funcValues: MutableMap<Double, MutableList<Double>> = mutableMapOf()
         var x = a
 
@@ -77,6 +77,16 @@ class Task1 : DoubleValuesUtils {
         }
 
         return funcValues
+    }
+
+    fun run() {
+        val values = fillFuncValuesMap(
+                a = 0.0,
+                b = 1.7,
+                h = 0.1,
+                e = 0.0001
+        )
+        printAsTable(values)
     }
 
 }

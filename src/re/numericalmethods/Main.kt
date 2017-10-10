@@ -5,17 +5,17 @@ class Main {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-//            val task = Task1()
-//            val values = task.fillFuncValuesMap(
-//                    a = 0.0,
-//                    b = 1.7,
-//                    h = 0.1,
-//                    e = 0.0001
-//            )
-//            task.printAsTable(values)
+            println("Task 1:")
+            val task1 = Task1()
+            task1.run()
 
+            println("Task 2:")
             val task2 = Task2()
             task2.run()
+
+            println("Task 3:")
+            val task3 = Task3()
+            task3.run()
         }
     }
 
