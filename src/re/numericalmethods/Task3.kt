@@ -4,45 +4,62 @@ class Task3: DoubleValuesUtils {
 
     private fun f(x: Double) = x * Math.cos(x)
 
-    private fun linearInterpolation(x: Double, prevX: Double, nextX: Double, prevF: Double, nextF: Double) =
+    private fun interpolationPolynom(x: Double, prevX: Double, nextX: Double, prevF: Double, nextF: Double) =
             ((x - nextX) / (prevX - nextX)) * prevF + ((x - prevX) / (nextX - prevX)) * nextF
 
     private fun findPair(value: Double, values: MutableMap<Double, Double>) =
         Pair(
-                values.keys.first { x -> x <= value },
-                values.keys.first { x -> x > value }
+                values.keys.firstOrNull { x -> x <= value } ?: values.keys.min(),
+                values.keys.firstOrNull { x -> x > value } ?: values.keys.max()
         )
+
+    private fun printHeader(with: String) {
+        println("x $with f(x) $with L(x)")
+    }
+
+    private fun printTableRow(argument: Double, polynomValue: Double, with: String) {
+        println("${argument.format(8)} $with ${f(argument).format(8)} $with ${polynomValue.format(8)}")
+    }
 
     private fun firstMethod(a: Double, b: Double, n: Int) {
         val functionValues = mutableMapOf<Double, Double>()
-        val h = (b - a) / n
 
         var arg: Double
-        (0..50).forEach {
-            arg = getCorrectDouble(it * Math.PI / 13, 8)
-            functionValues.put(arg, getCorrectDouble(f(arg), 8))
+        (0..n).forEach {
+            arg = getCorrectDouble(
+                    ((a + b) / 2) + ((b - a) / 2) * Math.cos((((2 * it + 1) * Math.PI) / (2 * (n + 1)))),
+                    8
+            )
+            functionValues.put(
+                    arg,
+                    f(arg)
+            )
         }
 
-        var pair: Pair<Double, Double>
+        var pair: Pair<Double?, Double?>
+        printHeader("\t\t\t\t")
         (0..n).forEach {
-            arg = getCorrectDouble(a + it * h, 8)
+            arg = getCorrectDouble(a + it * ((b - a) / n), 8)
             pair = findPair(arg, functionValues)
-            println("L($arg) = ${linearInterpolation(
+            printTableRow(
                     arg,
-                    pair.first,
-                    pair.second,
-                    functionValues[pair.first]!!,
-                    functionValues[pair.second]!!)
-            }")
+                    interpolationPolynom(
+                            arg,
+                            pair.first!!,
+                            pair.second!!,
+                            functionValues[pair.first!!]!!,
+                            functionValues[pair.second!!]!!
+                    ),
+                    "\t\t"
+            )
         }
     }
 
     fun run() {
         print("enter n: ")
         val n = readLine()!!.toInt()
-//        print("enter N: ")
-//        val N = readLine()!!.toInt()
-        val a = 0.0; val b = 2 * Math.PI
+        val a = 0.0
+        val b = 2 * Math.PI
 
         firstMethod(a, b, n)
 
