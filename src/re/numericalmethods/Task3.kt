@@ -4,7 +4,7 @@ class Task3: DoubleValuesUtils {
 
     private fun f(x: Double) = x * Math.cos(x)
 
-    private fun interpolationPolynom(x: Double, prevX: Double, nextX: Double, prevF: Double, nextF: Double) =
+    private fun linerInterpolationPolynom(x: Double, prevX: Double, nextX: Double, prevF: Double, nextF: Double) =
             ((x - nextX) / (prevX - nextX)) * prevF + ((x - prevX) / (nextX - prevX)) * nextF
 
     private fun findPair(value: Double, values: MutableMap<Double, Double>) =
@@ -21,7 +21,7 @@ class Task3: DoubleValuesUtils {
         println("${argument.format(8)} $with ${f(argument).format(8)} $with ${polynomValue.format(8)}")
     }
 
-    private fun firstMethod(a: Double, b: Double, n: Int) {
+    private fun linearInterpolation(a: Double, b: Double, n: Int) {
         val functionValues = mutableMapOf<Double, Double>()
 
         var arg: Double
@@ -32,7 +32,7 @@ class Task3: DoubleValuesUtils {
             )
             functionValues.put(
                     arg,
-                    f(arg)
+                    getCorrectDouble(f(arg), 8)
             )
         }
 
@@ -43,7 +43,7 @@ class Task3: DoubleValuesUtils {
             pair = findPair(arg, functionValues)
             printTableRow(
                     arg,
-                    interpolationPolynom(
+                    linerInterpolationPolynom(
                             arg,
                             pair.first!!,
                             pair.second!!,
@@ -61,7 +61,7 @@ class Task3: DoubleValuesUtils {
         val a = 0.0
         val b = 2 * Math.PI
 
-        firstMethod(a, b, n)
+        linearInterpolation(a, b, n)
 
     }
 
