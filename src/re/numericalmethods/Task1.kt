@@ -18,9 +18,7 @@ class Task1 : DoubleValuesUtils {
         return result - current
     }
 
-    private fun leftDerivative(fprev: Double, f: Double, h: Double) : Double = (f - fprev) / h
-
-    private fun rightDerivative(f: Double, fnext: Double, h: Double) : Double = (fnext - f) / h
+    private fun derivative(f1: Double, f2: Double, h: Double) : Double = (f1 - f2) / h
 
     private fun centralDerivative(fprev: Double, fnext: Double, h: Double) : Double = (fnext - fprev) / (2 * h)
 
@@ -57,12 +55,12 @@ class Task1 : DoubleValuesUtils {
 
         x = getCorrectDouble(a + h, 2)
         while (x < b) {
-            funcValues[x]?.add(this.leftDerivative(
+            funcValues[x]?.add(this.derivative(
                     funcValues[getCorrectDouble(x - h, 2)]!![0],
                     funcValues[x]!![0],
                     h
             ))
-            funcValues[x]?.add(this.rightDerivative(
+            funcValues[x]?.add(this.derivative(
                     funcValues[x]!![0],
                     funcValues[getCorrectDouble(x + h, 2)]!![0],
                     h
