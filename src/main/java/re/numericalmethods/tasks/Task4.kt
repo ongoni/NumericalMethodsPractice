@@ -1,7 +1,8 @@
-package re.numericalmethods
+package re.numericalmethods.tasks
 
-import re.numericalmethods.ArrayListExtensions.Companion.arrayListDifference
-import re.numericalmethods.ArrayListExtensions.Companion.arrayListMultiply
+import re.numericalmethods.utils.ArrayListExtensions.Companion.arrayListDifference
+import re.numericalmethods.utils.ArrayListExtensions.Companion.arrayListMultiply
+import re.numericalmethods.utils.DoubleValuesUtils
 import java.lang.Math.abs
 
 class Task4: DoubleValuesUtils {
@@ -87,19 +88,24 @@ class Task4: DoubleValuesUtils {
         val inputArray1 = arrayListOf(
                 arrayListOf(10.0, 0.1, 0.2, 1.0),
                 arrayListOf(0.1, 9.0, 0.3, 1.0),
-                arrayListOf(0.2, 0.3, 8.0, 1.0))
+                arrayListOf(0.2, 0.3, 8.0, 1.0)
+        )
         val inputArray2 = arrayListOf(
                 arrayListOf(10.0, 0.1, 0.2, 1.0),
                 arrayListOf(0.1, 9.0, 0.3, 1.0),
-                arrayListOf(0.2, 0.3, 8.0, 1.0))
+                arrayListOf(0.2, 0.3, 8.0, 1.0)
+        )
         val inputArray3 = arrayListOf(
                 arrayListOf(4.0, -2.0, 0.0, 1.0),
                 arrayListOf(1.0, 2.0, 1.0, 1.0),
-                arrayListOf(0.0, 3.0, 1.0, 1.0))
+                arrayListOf(0.0, 3.0, 1.0, 1.0)
+        )
         val inputArray4 = arrayListOf(
                 arrayListOf(4.0, -2.0, 0.0, 1.0),
                 arrayListOf(1.0, 2.0, 1.0, 1.0),
-                arrayListOf(0.0, 3.0, 1.0, 1.0))
+                arrayListOf(0.0, 3.0, 1.0, 1.0)
+        )
+
         println("Метод Гаусса\n" + gaussSolving(inputArray1))
         println("Погрешность метода Гаусса\n" + checkGaussSolution())
         println("Метод прогонки\n" + tridiagonalMatrix(inputArray2))

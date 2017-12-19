@@ -1,4 +1,4 @@
-package re.numericalmethods
+package re.numericalmethods.utils
 
 interface DoubleValuesUtils {
 

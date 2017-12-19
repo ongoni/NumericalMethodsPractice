@@ -1,4 +1,6 @@
-package re.numericalmethods
+package re.numericalmethods.tasks
+
+import re.numericalmethods.utils.DoubleValuesUtils
 
 class Task2 : DoubleValuesUtils {
 

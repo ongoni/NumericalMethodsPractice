@@ -1,4 +1,6 @@
-package re.numericalmethods
+package re.numericalmethods.tasks
+
+import re.numericalmethods.utils.DoubleValuesUtils
 
 class Task7: DoubleValuesUtils {
 
@@ -38,7 +40,7 @@ class Task7: DoubleValuesUtils {
         println(beta.toList())
         for (j in N - 1 downTo 1) y[j - 1] = getCorrectDouble(alpha[j] * y[j] + beta[j], 4)
 
-        val err = (1 until N - 1).map { getCorrectDouble(a[it] * y[it - 1] - c[it]*y[it] + b[it]*y[it + 1], 4) }
+        val err = (1 until N - 1).map { getCorrectDouble(a[it] * y[it - 1] - c[it] * y[it] + b[it] * y[it + 1], 4) }
         println(f.toList())
         println(err.toList())
 
